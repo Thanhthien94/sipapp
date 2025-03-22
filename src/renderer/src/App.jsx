@@ -1,33 +1,34 @@
-import Versions from './components/Versions'
-import electronLogo from './assets/electron.svg'
+import { SipProvider, useSip } from './context/SipContext'
+import LoginForm from '@components/LoginForm'
+import Dialer from '@components/Dialer'
 
-function App() {
-  const ipcHandle = () => window.electron.ipcRenderer.send('ping')
+// Component nội dung chính
+const MainContent = () => {
+  const { isRegistered } = useSip()
 
   return (
-    <>
-      <img alt="logo" className="logo" src={electronLogo} />
-      <div className="creator">Powered by electron-vite</div>
-      <div className="text">
-        Build an Electron app with <span className="react">React</span>
-      </div>
-      <p className="tip">
-        Please try pressing <code>F12</code> to open the devTool
-      </p>
-      <div className="actions">
-        <div className="action">
-          <a href="https://electron-vite.org/" target="_blank" rel="noreferrer">
-            Documentation
-          </a>
-        </div>
-        <div className="action">
-          <a target="_blank" rel="noreferrer" onClick={ipcHandle}>
-            Send IPC
-          </a>
-        </div>
-      </div>
-      <Versions></Versions>
-    </>
+    <div className="flex flex-col min-h-screen">
+      <header className="bg-primary text-white p-4 shadow-md">
+        <h1 className="text-xl font-bold text-center">SIP Call App</h1>
+      </header>
+
+      <main className="flex-1 flex items-center justify-center p-4 md:p-8">
+        {isRegistered ? <Dialer /> : <LoginForm />}
+      </main>
+
+      <footer className="bg-gray-100 p-4 text-center text-sm text-gray-600 border-t border-gray-200">
+        <p>SIP Call App &copy; {new Date().getFullYear()}</p>
+      </footer>
+    </div>
+  )
+}
+
+// Component App chính bao ngoài Provider
+function App() {
+  return (
+    <SipProvider>
+      <MainContent />
+    </SipProvider>
   )
 }
 

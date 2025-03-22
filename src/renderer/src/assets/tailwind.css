@@ -1,0 +1,40 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+    body {
+        @apply font-sans bg-gray-50 text-gray-800;
+    }
+}
+
+/* Custom components */
+@layer components {
+    .btn {
+        @apply px-4 py-2 rounded-md transition-colors font-medium focus:outline-none focus:ring-2 focus:ring-opacity-50;
+    }
+
+    .btn-primary {
+        @apply bg-primary text-white hover:bg-primary-dark focus:ring-primary;
+    }
+
+    .btn-success {
+        @apply bg-success text-white hover:bg-success-dark focus:ring-success;
+    }
+
+    .btn-danger {
+        @apply bg-danger text-white hover:bg-danger-dark focus:ring-danger;
+    }
+
+    .input {
+        @apply w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary focus:ring-opacity-50 focus:border-transparent;
+    }
+
+    .form-label {
+        @apply block mb-2 font-medium text-gray-700;
+    }
+
+    .dialpad-btn {
+        @apply w-full h-12 flex items-center justify-center bg-gray-100 rounded-md hover:bg-gray-200 transition-colors text-lg font-medium;
+    }
+}
